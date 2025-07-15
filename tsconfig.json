@@ -1,5 +1,12 @@
 {
+  "include": [
+    "src", 
+    "src/global.d.ts"
+  ],
   "files": [],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
