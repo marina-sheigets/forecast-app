@@ -1,0 +1,23 @@
+.weatherInfo {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date {
+    text-transform: uppercase;
+    color: rgba(0,0,0,.5);
+}
+
+.temperatures {
+    display: flex;
+    gap: 1rem;
+}
+
+.temperatures > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
