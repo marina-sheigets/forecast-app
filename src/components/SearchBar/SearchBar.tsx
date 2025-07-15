@@ -1,13 +1,15 @@
 import { useRef } from "react";
 import styles from "./SearchBar.module.css";
 
-const SearchBar = () => {
+type SearchBarProps = {
+  handleFetchWeather: (query: string) => void;
+};
+const SearchBar = ({ handleFetchWeather }: SearchBarProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = () => {
-    if (inputRef.current?.value.trim() !== "") {
-      const city = inputRef.current?.value;
-      //fetchWeather(city);
+    if (inputRef.current && inputRef.current.value.trim() !== "") {
+      handleFetchWeather(inputRef.current.value);
     }
   };
 

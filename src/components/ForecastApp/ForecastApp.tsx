@@ -1,25 +1,60 @@
+import { useEffect, useState } from "react";
 import type { Weather } from "../../types/Weather";
 import SearchBar from "../SearchBar/SearchBar";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
 import styles from "./ForecastApp.module.css";
+import Loader from "../Loader/Loader";
 
 const ForecastApp = () => {
-  const mockedWeather: Weather = {
-  timezone: "Europe/Kiev",
-  dt: 1689458400,
-  temp: 23.5,
-  wind_speed: 5.2,
-  weather: {
-    id: 800,
-    main: "Clear",
-  },
-  min: 18.0,
-  max: 26.7,
-};
+  const [weather, setWeather] = useState<Weather>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const handleFetchWeather = (query: string) => {
+    reset();
+
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${
+        import.meta.env.VITE_WEATHER_API_KEY
+      }`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.cod !== 200 && res.cod !== "200") {
+          throw new Error(res.message);
+        }
+
+        setWeather(res);
+      })
+      .catch((e) => {
+        setError(e.message || "Something went wrong");
+        setWeather(undefined);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const reset = () => {
+    setIsLoading(true);
+    setError("");
+  };
+
+  useEffect(() => {
+    handleFetchWeather("Kiev");
+  }, []);
+
   return (
     <div className={styles.forecastApp}>
-      <SearchBar />
-      <WeatherInfo weather={mockedWeather}/>
+      <SearchBar handleFetchWeather={handleFetchWeather} />
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <h2>{error}</h2>
+      ) : (
+        <WeatherInfo weather={weather} />
+      )}
+
       {/*
         <CityHistory /> */}
     </div>
