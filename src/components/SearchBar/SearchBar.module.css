@@ -1,0 +1,32 @@
+.searchBarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.searchButton {
+    border: none;
+    background-color: #687FE5;
+    color: #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.searchBar {
+    border: none;
+    background-color: #EBD6FB;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.searchBar::placeholder {
+    color: #000;
+}
