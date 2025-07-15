@@ -1,8 +1,11 @@
+import SearchBar from "../SearchBar/SearchBar";
+import styles from "./ForecastApp.module.css";
+
 const ForecastApp = () => {
   return (
-    <div className="forecast-app">
-      {/* <SearchBar />
-        <WeatherInfo />
+    <div className={styles.forecastApp}>
+      <SearchBar />
+      {/* <WeatherInfo />
         <CityHistory /> */}
     </div>
   );
