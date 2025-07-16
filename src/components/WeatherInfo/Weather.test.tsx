@@ -8,10 +8,7 @@ const mockedWeather: Weather = {
   dt: 1689458400,
   temp: 23.5,
   wind_speed: 12.3,
-  weather: {
-    id: 800,
-    main: "Clear",
-  },
+  weather: "Clear",
   min: 18.0,
   max: 26.7,
 };
@@ -23,7 +20,7 @@ jest.mock("../../utils/getFormattedDate", () => ({
 describe("WeatherInfo Component", () => {
   it("renders timezone", () => {
     render(<WeatherInfo weather={mockedWeather} />);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+    expect(screen.getAllByRole("heading", { level: 1 })[0]).toHaveTextContent(
       "Europe/Kiev"
     );
   });
