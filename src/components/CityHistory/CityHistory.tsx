@@ -6,9 +6,18 @@ import type { HistoryItem } from "../../types/HistoryItem";
 type CityHistoryProps = {
   cities: HistoryItem[];
   onCitySelect: (city: HistoryItem) => void;
+  lastRemovedItem: HistoryItem | null;
+  onUndoRemove: () => void;
+  onCityRemove: (cityId: string) => void;
 };
 
-const CityHistory = ({ cities, onCitySelect }: CityHistoryProps) => {
+const CityHistory = ({
+  cities,
+  onCitySelect,
+  lastRemovedItem,
+  onUndoRemove,
+  onCityRemove,
+}: CityHistoryProps) => {
   const [isHistoryShowed, setIsHistoryShowed] = useState(false);
 
   const handleToggleHistoryVisibility = () => {
@@ -35,38 +44,49 @@ const CityHistory = ({ cities, onCitySelect }: CityHistoryProps) => {
         >
           <div
             className={styles.cityHistory}
-            onClick={(e) => e.stopPropagation()} // prevent closing
+            onClick={(e) => e.stopPropagation()}
           >
             <div className={styles.header}>
               <h3>Recent Searches ({cities.length})</h3>
             </div>
+
             <div className={styles.content}>
               {cities.length > 0 ? (
-                <div className={styles.cityList}>
-                  {cities.map((city) => (
-                    <div key={city.id} className={styles.cityItem}>
-                      <div
-                        className={styles.cityInfo}
-                        onClick={() => onCitySelect(city)}
-                      >
-                        <div className={styles.cityName}>{city.timezone}</div>
-                        <div className={styles.cityMeta}>
-                          {city.weather && (
-                            <span className={styles.temperature}>
-                              {city.weather.temp} °C
-                            </span>
-                          )}
+                <>
+                  <div className={styles.cityList}>
+                    {cities.map((city) => (
+                      <div key={city.id} className={styles.cityItem}>
+                        <div
+                          className={styles.cityInfo}
+                          onClick={() => onCitySelect(city)}
+                        >
+                          <div className={styles.cityName}>{city.timezone}</div>
+                          <div className={styles.cityMeta}>
+                            {city.weather && (
+                              <span className={styles.temperature}>
+                                {city.weather.temp} °C
+                              </span>
+                            )}
+                          </div>
                         </div>
+                        <button
+                          className={styles.removeButton}
+                          title="Remove from history"
+                          onClick={() => onCityRemove(city.id)}
+                        >
+                          ×
+                        </button>
                       </div>
-                      <button
-                        className={styles.removeButton}
-                        title="Remove from history"
-                      >
-                        ×
-                      </button>
+                    ))}
+                  </div>
+
+                  {lastRemovedItem && onUndoRemove && (
+                    <div className={styles.undoContainer}>
+                      <p>City "{lastRemovedItem.timezone}" removed.</p>
+                      <button onClick={onUndoRemove}>Undo</button>
                     </div>
-                  ))}
-                </div>
+                  )}
+                </>
               ) : (
                 <div className={styles.emptyState}>
                   <p>No recent searches</p>

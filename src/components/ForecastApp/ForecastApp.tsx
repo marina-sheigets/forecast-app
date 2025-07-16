@@ -12,7 +12,9 @@ const ForecastApp = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [history, setHistory] = useState<HistoryItem[]>([]);
-
+  const [lastRemovedItem, setLastRemovedItem] = useState<HistoryItem | null>(
+    null
+  );
   const addToHistory = (weatherData: Weather) => {
     const newHistoryItem: HistoryItem = {
       id: Date.now().toString(),
@@ -95,6 +97,32 @@ const ForecastApp = () => {
     setError("");
   };
 
+  const handleRemoveCity = (cityId: string) => {
+    const removedHistoryItem = history.find((item) => item.id === cityId);
+    if (!removedHistoryItem) {
+      return;
+    }
+
+    const newHistory = history.filter((city) => city.id !== cityId);
+    setLastRemovedItem(removedHistoryItem);
+    setHistory(newHistory);
+  };
+
+  const handleUndoRemove = () => {
+    if (!lastRemovedItem) return;
+
+    setHistory((prev) => {
+      const withoutDuplicate = prev.filter(
+        (item) =>
+          item.timezone.toLowerCase() !== lastRemovedItem.timezone.toLowerCase()
+      );
+
+      return [lastRemovedItem, ...withoutDuplicate].slice(0, 10);
+    });
+
+    setLastRemovedItem(null);
+  };
+
   useEffect(() => {
     handleFetchWeather("Kiev");
   }, []);
@@ -106,7 +134,13 @@ const ForecastApp = () => {
       {error ? <h2>{error}</h2> : null}
       {weather ? <WeatherInfo weather={weather} /> : null}
 
-      <CityHistory cities={history} onCitySelect={handleCitySelect} />
+      <CityHistory
+        cities={history}
+        onCitySelect={handleCitySelect}
+        onCityRemove={handleRemoveCity}
+        lastRemovedItem={lastRemovedItem}
+        onUndoRemove={handleUndoRemove}
+      />
     </div>
   );
 };

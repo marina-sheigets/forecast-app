@@ -155,3 +155,21 @@
   margin: 0;
   font-style: italic;
 }
+
+.undoContainer {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #f3f3f3;
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+.undoContainer button {
+  margin-top: 0.5rem;
+  padding: 0.4rem 1rem;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
