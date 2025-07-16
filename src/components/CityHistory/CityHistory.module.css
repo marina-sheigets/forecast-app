@@ -1,0 +1,157 @@
+.historyPopupContainer {
+  position: absolute;
+  width: 100%;
+  top:0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(0,0,0,0.5);
+}
+
+.cityHistory {
+  margin-top: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.seeHistoryButton {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.toggleButton {
+  padding: 6px 12px;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.clearButton {
+  padding: 6px 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.clearButton:hover {
+  background: #c82333;
+}
+
+
+
+.undoButton {
+  background: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.undoButton:hover {
+  background: #e0a800;
+}
+
+.cityList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cityItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 12px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+
+.cityInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cityName {
+  font-weight: 500;
+  color: #333;
+  font-size: 16px;
+}
+
+.cityMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchTime {
+  color: #666;
+  font-size: 12px;
+}
+
+.temperature {
+  color: #007bff;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.removeButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+}
+
+.removeButton:hover {
+  transform: scale(1.1);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.emptyState p {
+  margin: 0;
+  font-style: italic;
+}
