@@ -1,6 +1,6 @@
 # Weather Forecast App
 
-Live version of the app is published here 
+Live version of the app is published here https://forecast-app-psi.vercel.app/
 
 ## Features
 
