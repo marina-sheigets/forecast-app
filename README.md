@@ -24,7 +24,6 @@ Live version of the app is published here
 - Wind speed
 
 ### Search History
-- Persistent storage of searched cities
 - One-click weather retrieval from history
 - Remove individual history items
 - Undo remove actions
