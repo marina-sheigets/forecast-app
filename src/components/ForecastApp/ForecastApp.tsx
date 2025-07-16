@@ -24,7 +24,15 @@ const ForecastApp = () => {
           throw new Error(res.message);
         }
 
-        setWeather(res);
+        setWeather({
+          dt: res.dt,
+          max: Math.round(res.main.temp_max - 273.15),
+          min: Math.round(res.main.temp_min - 273.15),
+          temp: Math.round(res.main.temp - 273.15),
+          timezone: res.name,
+          weather: res.weather[0].main,
+          wind_speed: res.wind.speed,
+        });
       })
       .catch((e) => {
         setError(e.message || "Something went wrong");
@@ -47,13 +55,9 @@ const ForecastApp = () => {
   return (
     <div className={styles.forecastApp}>
       <SearchBar handleFetchWeather={handleFetchWeather} />
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
-        <h2>{error}</h2>
-      ) : (
-        <WeatherInfo weather={weather} />
-      )}
+      {isLoading ? <Loader /> : null}
+      {error ? <h2>{error}</h2> : null}
+      {weather ? <WeatherInfo weather={weather} /> : null}
 
       {/*
         <CityHistory /> */}
