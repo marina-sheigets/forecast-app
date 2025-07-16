@@ -1,5 +1,7 @@
 export const getFormattedDate = (d: number) => {
-    const date = new Date(d);
+    // Convert seconds to milliseconds
+    const date = new Date(d * 1000);
+
     const options: Intl.DateTimeFormatOptions = {
         year: 'numeric',
         month: 'long',
