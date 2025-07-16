@@ -14,7 +14,7 @@ const WeatherInfo = ({ weather }: WeatherInfoProps) => {
       <h1>{weather.temp} °C</h1>
       <p className={styles.date}>{getFormattedDate(weather.dt)}</p>
       <h2>{weather.weather} weather</h2>
-      <p className={styles.temperatures}>
+      <div className={styles.temperatures}>
         <div>
           <FaTemperatureArrowUp />
           {weather.max} °C
@@ -24,7 +24,7 @@ const WeatherInfo = ({ weather }: WeatherInfoProps) => {
           <FaTemperatureArrowDown />
           {weather.min} °C
         </div>
-      </p>
+      </div>
       <p>Wind: {weather.wind_speed} km/h</p>
     </div>
   );
