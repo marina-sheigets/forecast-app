@@ -10,6 +10,7 @@ const SearchBar = ({ handleFetchWeather }: SearchBarProps) => {
   const handleSearch = () => {
     if (inputRef.current && inputRef.current.value.trim() !== "") {
       handleFetchWeather(inputRef.current.value);
+      inputRef.current.value = "";
     }
   };
 
